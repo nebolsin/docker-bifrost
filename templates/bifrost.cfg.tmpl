@@ -1,0 +1,30 @@
+port = {{getv "/bifrost/port"}}
+using_proxy = {{getv "/bifrost/using/proxy"}}
+access-control-allow-origin-header = "*"
+
+
+[bitcoin]
+master_public_key = "{{getv "/bifrost/bitcoin/master/public/key"}}"
+rpc_server = "{{getv "/bifrost/bitcoin/rpc/server"}}"
+rpc_user = "{{getv "/bifrost/bitcoin/rpc/user"}}"
+rpc_pass = "{{getv "/bifrost/bitcoin/rpc/pass"}}"
+testnet = {{getv "/bifrost/bitcoin/testnet"}}
+minimum_value_btc = "{{getv "/bifrost/bitcoin/minimum/value/btc"}}"
+
+[ethereum]
+master_public_key = "{{getv "/bifrost/ethereum/master/public/key"}}"
+rpc_server = "{{getv "/bifrost/ethereum/rpc/server"}}"
+network_id = "{{getv "/bifrost/ethereum/network/id"}}"
+minimum_value_eth = "{{getv "/bifrost/ethereum/minimum/value/eth"}}"
+
+[stellar]
+issuer_public_key = "{{getv "/bifrost/stellar/issuer/public/key"}}"
+signer_secret_key = "{{getv "/bifrost/stellar/signer/secret/key"}}"
+token_asset_code = "{{getv "/bifrost/stellar/token/asset/code"}}"
+needs_authorize = {{getv "/bifrost/stellar/needs/authorize"}}
+horizon = "{{getv "/bifrost/stellar/horizon"}}"
+network_passphrase = "{{getv "/bifrost/stellar/network/passphrase"}}"
+
+[database]
+type="postgres"
+dsn="postgres://{{getv "/pguser"}}:{{getv "/pgpassword"}}@{{getv "/pghost"}}/{{getv "/bifrost/database"}}?sslmode={{getv "/pgsslmode"}}"

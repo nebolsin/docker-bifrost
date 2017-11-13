@@ -1,0 +1,60 @@
+version: '3.4'
+
+services:
+  stellar:
+    image: stellar/quickstart
+    command: ["--testnet"]
+    networks:
+      - stellar
+    ports:
+      - 8000:8000
+    volumes:
+      - stellar-data:/opt/stellar
+
+  ethereum:
+    image: ethereum/client-go
+    command: ["--${NETWORK}", "--rpc", "--rpcaddr", "0.0.0.0", "--cache", "512", "--fast", "--metrics"]
+    healthcheck:
+      test: "geth --exec 'net.version' attach http://localhost:8545"
+    networks:
+      - ethereum
+    ports:
+      - 8545:8545
+      - 30303:30303
+    volumes:
+      - ethereum-data:/root
+
+  bitcoin:
+    image: nebolsin/bitcoin-rpc
+    env_file: ./.env.sample
+    networks:
+      - bitcoin
+    ports:
+      - 8332:8332
+      - 8333:8333
+    volumes:
+      - bitcoin-data:/home/bitcoin/.bitcoin
+
+  bifrost:
+    image: nebolsin/bifrost
+    env_file: ./.env.sample
+    networks:
+      - bitcoin
+      - ethereum
+      - stellar
+    depends_on:
+      - stellar
+      - eth
+      - bitcoin
+    ports:
+      - 9000:9000
+
+networks:
+  bitcoin:
+  ethereum:
+  stellar:
+
+volumes:
+  bitcoin-data:
+  ethereum-data:
+  stellar-data:
