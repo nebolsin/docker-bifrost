@@ -2,6 +2,6 @@
 set -o errexit
 set -o pipefail
 
-/usr/bin/confd -onetime -backend env
+/usr/local/bin/confd -onetime -backend env
 
 exec "$@"
