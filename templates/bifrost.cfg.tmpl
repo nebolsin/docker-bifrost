@@ -27,4 +27,4 @@ network_passphrase = "{{getv "/bifrost/stellar/network/passphrase"}}"
 
 [database]
 type="postgres"
-dsn="postgres://{{getv "/pguser"}}:{{getv "/pgpassword"}}@{{getv "/pghost"}}/{{getv "/bifrost/database"}}?sslmode={{getv "/pgsslmode"}}"
+dsn="{{getv "/bifrost/database/url"}}"

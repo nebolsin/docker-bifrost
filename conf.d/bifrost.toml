@@ -3,10 +3,5 @@ src = "bifrost.cfg.tmpl"
 dest = "/etc/bifrost.cfg"
 
 keys = [
-  "/pguser",
-  "/pgpassword",
-  "/pghost",
-  "/pgport",
-  "/pgsslmode",
   "/bifrost",
 ]
